@@ -1,0 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace WeatherApp.Models
+{
+    public class WeatherProperty
+    {
+        public string Name { get; set; } = "";
+        public object Value { get; set; }
+    }
+}
