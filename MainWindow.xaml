@@ -15,7 +15,7 @@
 
 
 
-        <wv2:WebView2 Grid.Column="0" Margin="20" Source="https://www.google.com/maps"/>
+        <wv2:WebView2 Grid.Column="0" Margin="20" Source="https://www.iflightplanner.com/AviationCharts/"/>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>

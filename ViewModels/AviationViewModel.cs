@@ -24,7 +24,7 @@ namespace WeatherApp.ViewModels
         [ObservableProperty]
         private string statusText = "Enter a METAR ID and press Submit.";
         [ObservableProperty]
-        private string locationName = "";
+        private string locationName = "Aviation";
 
         public ObservableCollection<AviationProperty> AviationValues { get; } = new();
 
@@ -54,10 +54,22 @@ namespace WeatherApp.ViewModels
 
                 foreach (var property in values.GetType().GetProperties())
                 {
+                   object? propertyValue = property.GetValue(aviation);
+
+                    if(property.Name.Equals("clouds", StringComparison.OrdinalIgnoreCase))
+                    {
+                        if(propertyValue is System.Collections.IEnumerable list)
+                        {
+                            var cloudItems = list.Cast<object>().Select(item => item.ToString()).ToList();
+
+                            propertyValue = cloudItems.Any() ? string.Join(", ", cloudItems) : "Clear";
+                        }
+                    }
+
                     AviationValues.Add(new AviationProperty
                     {
                         Name = property.Name,
-                        Value = property.GetValue(aviation)
+                        Value = propertyValue
                     });
                 }
                 LocationName = aviation.name;
