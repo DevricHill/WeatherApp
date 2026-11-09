@@ -45,7 +45,7 @@ namespace WeatherApp.ViewModels
 
             try
             {
-                Root? weather = await weatherService.GetRealTimeWeatherAsync(ZipCode, ApiKey);
+                WeatherRoot? weather = await weatherService.GetRealTimeWeatherAsync(ZipCode, ApiKey);
 
                 if (weather?.data?.values is null)
                 {

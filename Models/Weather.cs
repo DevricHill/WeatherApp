@@ -19,7 +19,7 @@ namespace WeatherApp.Models
         public string type { get; set; }
     }
 
-    public class Root
+    public class WeatherRoot
     {
         public Data data { get; set; }
         public Location location { get; set; }

@@ -28,7 +28,8 @@ namespace WeatherApp
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new WeatherViewModel(new WeatherService());
+            weatherTab.DataContext = new WeatherViewModel(new WeatherService());
+            aviationTab.DataContext = new AviationViewModel(new AviationWeatherService());
         }
 
       

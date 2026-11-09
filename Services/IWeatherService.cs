@@ -7,6 +7,6 @@ namespace WeatherApp.Services
 {
     public interface IWeatherService
     {
-        Task<Root> GetRealTimeWeatherAsync(string zip, string apiKey);
+        Task<WeatherRoot> GetRealTimeWeatherAsync(string zip, string apiKey);
     }
 }

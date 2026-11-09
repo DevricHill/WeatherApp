@@ -11,7 +11,7 @@ namespace WeatherApp.Services
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public async Task<Root?> GetRealTimeWeatherAsync(string zipCode, string apiKey)
+        public async Task<WeatherRoot?> GetRealTimeWeatherAsync(string zipCode, string apiKey)
         {
             string location = Uri.EscapeDataString(zipCode);
             string url = $"https://api.tomorrow.io/v4/weather/realtime?location={location}&units=imperial&apikey={apiKey}";
@@ -23,7 +23,7 @@ namespace WeatherApp.Services
                 throw new HttpRequestException($"Weather request failed {response.StatusCode}");
             }
 
-            return await response.Content.ReadFromJsonAsync<Root>();
+            return await response.Content.ReadFromJsonAsync<WeatherRoot>();
         }
     }
 }
