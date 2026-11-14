@@ -14,7 +14,7 @@ namespace WeatherApp.Models
         public string receiptTime { get; set; }
         public int obsTime { get; set; }
         public string reportTime { get; set; }
-        public double temp { get; set; }
+        public double temp { get { return Math.Round((field * 9 / 5) + 32, 1); } set; }
         public double dewp { get; set; }
         public object? wdir { get; set; }
         public int wspd { get; set; }

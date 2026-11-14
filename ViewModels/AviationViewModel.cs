@@ -9,29 +9,26 @@ using WeatherApp.Services;
 
 namespace WeatherApp.ViewModels
 {
-    public partial class AviationViewModel : ObservableObject
+    public partial class AviationViewModel : BasicViewModel
     {
         private IAviationWeatherService aviationWeatherService;
 
         public AviationViewModel(IAviationWeatherService aviationWeather)
         {
             aviationWeatherService = aviationWeather;
+
+            StatusText = "Enter a METAR ID and press Submit.";
         }
 
         [ObservableProperty]
         private string ids = "";
-
-        [ObservableProperty]
-        private string statusText = "Enter a METAR ID and press Submit.";
-        [ObservableProperty]
-        private string locationName = "Aviation";
 
         public ObservableCollection<AviationProperty> AviationValues { get; } = new();
 
         [RelayCommand]
         private async Task LoadAviationAsync()
         {
-            if (string.IsNullOrEmpty(ids))
+            if (string.IsNullOrEmpty(Ids))
             {
                 StatusText = "Please enter a valid METAR ID.";
                 return;
@@ -41,7 +38,7 @@ namespace WeatherApp.ViewModels
 
             try
             {
-                AviationRoot? aviation = await aviationWeatherService.GetAviationMetarAsync(ids);
+                AviationRoot? aviation = await aviationWeatherService.GetAviationMetarAsync(Ids);
 
                 if(aviation is null)
                 {

@@ -9,33 +9,26 @@ using WeatherApp.Services;
 
 namespace WeatherApp.ViewModels
 {
-    public partial class WeatherViewModel : ObservableObject
+    public partial class WeatherViewModel : BasicViewModel
     {
         private IWeatherService weatherService;
 
         public WeatherViewModel(IWeatherService weatherService)
         {
             this.weatherService = weatherService;
+
+            StatusText = "Enter a zip code and press Submit.";
         }
 
         [ObservableProperty]
         private string apiKey = "";
-
-        [ObservableProperty]
-        private string zipCode = "";
-
-        [ObservableProperty]
-        private string locationName = "Weather";
-
-        [ObservableProperty]
-        private string statusText = "Enter a zip code and press Submit.";
 
         public ObservableCollection<WeatherProperty> WeatherValues { get; } = new();
 
         [RelayCommand]
         private async Task LoadWeatherAsync()
         {
-            if (string.IsNullOrWhiteSpace(ZipCode) || string.IsNullOrWhiteSpace(ApiKey))
+            if (string.IsNullOrWhiteSpace(Id) || string.IsNullOrWhiteSpace(ApiKey))
             {
                 StatusText = "Please enter both an API key and a zip code.";
                 return;
@@ -45,7 +38,7 @@ namespace WeatherApp.ViewModels
 
             try
             {
-                WeatherRoot? weather = await weatherService.GetRealTimeWeatherAsync(ZipCode, ApiKey);
+                WeatherRoot? weather = await weatherService.GetRealTimeWeatherAsync(Id, ApiKey);
 
                 if (weather?.data?.values is null)
                 {
@@ -65,7 +58,7 @@ namespace WeatherApp.ViewModels
                     });
                 }
 
-                LocationName = weather.location?.name ?? ZipCode;
+                LocationName = weather.location?.name ?? Id;
                 StatusText = $"Updated: {weather.data.time.ToLocalTime():h:mm tt}";
             }
             catch (Exception ex)

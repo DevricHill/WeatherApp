@@ -48,17 +48,17 @@
 
                             <WrapPanel>
                                 <Label Content="Tommorrow.io Api Key"/>
-                                <TextBox Text="{Binding ApiKey, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="5"/>
+                                <TextBox Text="{Binding ApiKey}" Width="200" Margin="5"/>
 
                                 <Label Content="Zip Code"/>
-                                <TextBox Text="{Binding ZipCode, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="5"/>
+                                <TextBox Text="{Binding Id}" Width="200" Margin="5"/>
 
                                 <Button Content="Submit" Command="{Binding LoadWeatherCommand}" 
                                     Width="80" Height="20" Margin="10" Background="AliceBlue"/>
 
                             </WrapPanel>
 
-                            <TextBlock Text="{Binding StatusText}" Margin="5,0"/>
+                            <TextBlock  Text="{Binding StatusText}" Margin="5,0"/>
                         </StackPanel>
 
 
